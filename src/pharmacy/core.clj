@@ -156,4 +156,6 @@
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (let [f (first args)
+        raw (get-raw-from-excel "http://10.20.30.40:5001/" f)]
+    (doall (process raw))))
