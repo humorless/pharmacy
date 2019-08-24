@@ -70,11 +70,26 @@
        " [textinfo_29] = %s"
        " WHERE [odr_code] = %s"))
 
-(defn escape
+(defn escape-tab-newline
+  [i-str]
+  (string/replace
+   (string/replace i-str #"\t" "' + CHAR(9) + '")
+   #"\n"
+   "' + CHAR(10) + '"))
+
+(defn escape-single-quote
   [d-str]
-  (if (= \' (first d-str))
-    (string/escape (apply str (rest d-str)) {\' "''"})
-    (string/escape d-str {\' "''"})))
+  (string/escape
+   (if (= \' (first d-str))
+     (apply str (rest d-str))
+     d-str)
+   {\' "''"}))
+
+(defn escape
+  [i-str]
+  (-> i-str
+      escape-single-quote
+      escape-tab-newline))
 
 (defn c-nil
   [d]
@@ -82,7 +97,7 @@
     "NULL"
     (if (string? d)
       (format "'%s'" (escape d))
-      (format "'%s'" d))))
+      (format "%f" d))))
 
 (defn data->str
   [data]
