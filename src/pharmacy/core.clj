@@ -97,7 +97,7 @@
     "NULL"
     (if (string? d)
       (format "'%s'" (escape d))
-      (format "%f" d))))
+      (format "'%s'" d))))
 
 (defn data->str
   [data]
