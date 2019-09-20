@@ -14,7 +14,7 @@ Download from http://example.com/FIXME.
    ```
 3. On the same directory, there will be a `sql.txt`
 
-## How to run
+## Run by Leiningen
 1. Prepare the `data.xlsx`. Change the sheet name as `Sheet0`
 2. Run the command:
    ```
